@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button defaultHref="dashboard/tabs/products"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ loadedProduct ? loadedProduct.title : 'Product Cart'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-product-cart-item [productItem]="loadedProduct"></app-product-cart-item>
+</ion-content>

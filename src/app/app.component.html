@@ -1,0 +1,84 @@
+<ion-app>
+  <!-- Dashboard side drawer -->
+  <ion-menu side="start" contentId="dashboardMenu">
+    <ion-header collapse="condense" [translucent]="true">
+      <ion-toolbar color="primary">
+        <ion-buttons>
+          <ion-button (click)="closeSideDrawer()">
+            <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list class="ion-padding-top">
+        <!-- <ion-menu-toggle>
+          <ion-item routerLink="/dashboard/tabs/products">
+            <ion-icon name="construct-outline" slot="start"></ion-icon>
+            <ion-label>Building Materials</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/dashboard/tabs/products">
+            <ion-icon name="grid-outline" slot="start"></ion-icon>
+            <ion-label>Featured Departments</ion-label>
+          </ion-item>
+        </ion-menu-toggle> -->
+        <ion-menu-toggle>
+          <ion-item routerLink="/dashboard/tabs/products">
+            <ion-icon name="grid-outline" slot="start"></ion-icon>
+            <ion-label>Products</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/dashboard/tabs/cart">
+            <ion-icon name="cart-outline" slot="start"></ion-icon>
+            <ion-label>Cart</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/dashboard/tabs/orders">
+            <ion-icon name="bag-handle-outline" slot="start"></ion-icon>
+            <ion-label>Orders</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/dashboard/tabs/profile">
+            <ion-icon name="person-outline" slot="start"></ion-icon>
+            <ion-label>Profile</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/dashboard/tabs/calculator">
+            <ion-icon name="calculator-outline" slot="start"></ion-icon>
+            <ion-label>Calculator</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/dashboard/tabs/faqs">
+            <ion-icon name="ellipsis-horizontal-outline" slot="start"></ion-icon>
+            <ion-label>More</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item button (click)="logOut()">
+            <ion-icon name="exit-outline" slot="start"></ion-icon>
+            <ion-label>Log Out</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <!-- Image -->
+        <ion-grid class="ion-margin">
+          <ion-row>
+            <ion-col sizeSm="8" offsetSm="2">
+              <ion-img src="../assets/icon/appicon.png"></ion-img>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="dashboardMenu"></ion-router-outlet>
+</ion-app>

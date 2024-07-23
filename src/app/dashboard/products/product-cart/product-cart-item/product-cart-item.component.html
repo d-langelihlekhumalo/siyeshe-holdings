@@ -1,0 +1,67 @@
+<!-- If productItem is empty -->
+<ion-grid *ngIf="productItem?.productTypes.length < 0">
+  <ion-row>
+    <ion-col size="6" offset="3">
+      <ion-text color="danger">
+        <h1>There are no items to display</h1>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<!-- If productItem is supplied -->
+<ion-grid *ngIf="productItem?.productTypes.length >= 0"  class="ion-no-padding">
+  <ion-row *ngFor="let product of productItem?.productTypes, index as i">
+    <ion-col sizeSm="6">
+      <ion-card class="ion-no-padding">
+        <ion-card-header>
+          <ion-card-subtitle>R {{productItem?.productPrices[i]}}</ion-card-subtitle>
+          <ion-card-title class="ion-text-center">{{product}}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-img  class="ion-no-padding" [src]="productItem?.productImages[i]"></ion-img>
+          <!-- Inner ion grid -->
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3"></ion-col>
+              <ion-col size="2">
+                <ion-button color="tertiary" expand="block" (click)="decrementQuantity(product, productItem.productImages[i], productItem.productPrices[i])">
+                  <ion-icon name="remove-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+              </ion-col>
+
+              <ion-col size="2">
+                <ion-button expand="block" fill="outline" disabled [id]="product">1</ion-button>
+              </ion-col>
+
+              <ion-col size="2">
+                <ion-button color="secondary" expand="block" (click)="incrementQuantity(product, productItem.productImages[i], productItem.productPrices[i])">
+                  <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="3"></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="4" offset="4">
+                <ion-button expand="block" fill="outline" disabled [id]="productItem.productImages[i]">R {{productItem.productPrices[i]}}</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="2">
+                <ion-button fill="outline" color="danger" (click)="removeItemFromCart(product)">
+                  <ion-icon name="cut-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="8"></ion-col>
+              <ion-col size="2">
+                <ion-button fill="outline" color="warning" (click)="addItemToCart(product, productItem.productImages[i])">
+                  <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

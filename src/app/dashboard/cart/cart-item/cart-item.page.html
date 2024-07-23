@@ -1,0 +1,67 @@
+<ion-header collapse="condense" [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{selectedItem[0]}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="ion-no-padding">
+    <ion-card-header>
+      <ion-card-subtitle>R {{selectedItem[2]}}</ion-card-subtitle>
+      <ion-card-title class="ion-text-center">{{selectedItem[0]}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-img  class="ion-no-padding" [src]="selectedItem[1]"></ion-img>
+      <!-- Inner ion grid -->
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2"></ion-col>
+          <ion-col size="3">
+            <!-- (click)="decrementQuantity(product, productItem.productImages[i], productItem.productPrices[i])" -->
+            <ion-button color="tertiary" expand="block" (click)="decrementQuantity()">
+              <ion-icon name="remove-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="2">
+            <ion-button expand="block" fill="outline" disabled [id]="selectedItem[0]">{{itemQuantity}}</ion-button>
+          </ion-col>
+
+          <ion-col size="3">
+            <!-- (click)="incrementQuantity(product, productItem.productImages[i], productItem.productPrices[i])" -->
+            <ion-button color="secondary" expand="block" (click)="incrementQuantity()">
+              <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="2"></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" offset="4">
+            <ion-button expand="block" fill="outline" disabled [id]="selectedItem[1]">R {{itemPrice}}</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="2">
+            <!-- (click)="removeItemFromCart(product)" -->
+            <ion-button fill="outline" color="danger" (click)="removeItemFromCart()">
+              <ion-icon name="cut-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="8"></ion-col>
+          <ion-col size="2">
+            <!--  (click)="addItemToCart(product, productItem.productImages[i])" -->
+            <ion-button fill="outline" color="warning" (click)="addItemToCart()">
+              <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

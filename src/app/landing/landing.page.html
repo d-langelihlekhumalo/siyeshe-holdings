@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Siyeshe Holdings</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="displayLoginPage()">
+        <ion-icon slot="icon-only" name="log-in-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <!-- Swiper: carousel Slider -->
+  <swiper #swiper [config]="config">
+    <ng-template swiperSlide>
+      <ion-img src="../../assets/landing_page/slides/img_1.jpeg"></ion-img>
+    </ng-template>
+    <ng-template swiperSlide>
+      <ion-img src="../../assets/landing_page/slides/img_2.jpeg"></ion-img>
+    </ng-template>
+    <ng-template swiperSlide>
+      <ion-img src="../../assets/landing_page/slides/img_3.jpeg"></ion-img>
+    </ng-template>
+  </swiper>
+  <!-- Grid: Cards -->
+  <ion-grid>
+    <!-- Display cards -->
+    <ion-row class="ion-no-padding">
+      <ion-col size="6">
+          <ion-text class="ion-text-center" color="primary">
+            <h5>Catalog</h5>
+          </ion-text>
+          <ion-img src="../../assets/landing_page/cards/build_possibilities.jpeg"></ion-img>
+          <ion-button color="primary" expand="block" fill="outline" (click)="presentAlert()">
+            <ion-icon name="folder-open-outline" slot="start"></ion-icon>
+            <ion-label>View Catalog</ion-label>
+          </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-text class="ion-text-center" color="secondary">
+          <h5>Delivery Options</h5>
+        </ion-text>
+        <ion-img src="../../assets/landing_page/cards/free_delivery.jpeg"></ion-img>
+        <ion-button
+          color="secondary"
+          expand="block"
+          fill="outline"
+          (click)="displayDeliveryOptions()">
+          <ion-icon name="glasses-outline" slot="start"></ion-icon>
+          <ion-label>Read More</ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <!-- Login -->
+    <ion-row>
+      <ion-col size="3"></ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" color="warning" (click)="displayLoginPage()">
+          <ion-icon name="log-in-outline"></ion-icon>
+          Login
+        </ion-button>
+      </ion-col>
+      <ion-col size="3"></ion-col>
+    </ion-row>
+    <!-- Featured Products -->
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <h1>Featured Departments</h1>
+      </ion-col>
+    </ion-row>
+    <!--
+      Display products:
+        - Display spinner then products if found
+     -->
+     <ion-row *ngIf="isLoading">
+       <ion-col size="4"></ion-col>
+       <ion-col size="4" class="ion-text-center">
+         <ion-spinner color="primary" name="circles"></ion-spinner>
+       </ion-col>
+       <ion-col size="4"></ion-col>
+     </ion-row>
+
+    <ion-row *ngIf="!isLoading">
+      <ion-col id="featured-products">
+        <ion-list>
+          <ion-item-sliding *ngFor="let product of products" #slidingItem>
+            <app-product-item [product]="product"></app-product-item>
+
+            <ion-item-options side="end">
+              <ion-item-option color="tertiary" (click)="displayProductDetails(product.id, slidingItem)">
+                <ion-icon name="eye-outline" slot="icon-only"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

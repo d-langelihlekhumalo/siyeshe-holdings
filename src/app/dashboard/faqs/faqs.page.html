@@ -1,0 +1,226 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ status }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- [(ngModel)]="status" -->
+  <ion-segment [(ngModel)]="status">
+    <ion-segment-button value="FAQs">
+      <ion-label>FAQs</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Developer">
+      <ion-label>Developer</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="About">
+      <ion-label>About</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="status">
+    <!-- FAQs -->
+    <div *ngSwitchCase="'FAQs'">
+      <ion-text class="ion-text-center" color="dark">
+        <h5>Choose Your Building Materials: Most Frequently Asked Questions</h5>
+      </ion-text>
+        <ion-img src="../../../assets/dashboard/faqs.jpg"></ion-img>
+
+        <ion-text class="ion-text-center">
+          <p>Every day, thousands of people are looking for information on building
+            materials online; price, quality, technicalities- every category of question.
+            These two questions stood out. Firstly, because they contain good content for
+            general knowledge and secondly, because their answer can improve your quality of living.</p>
+        </ion-text>
+
+        <ion-item-group>
+          <ion-item-divider class="ion-padding">
+            <ion-label>Question 1</ion-label>
+          </ion-item-divider>
+          <ion-item>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title class="ion-text-center">Which Building Material Contains Asbestos?</ion-card-title>
+              </ion-card-header>
+
+              <ion-card-content>
+                <ion-text>
+                  <p>Let’s first pose the question, why are so many people worried about it? Well,
+                    that’s because asbestos is bad for your health and can cause extreme illnesses
+                    like lung cancer, mesothelioma and asbestosis. But don’t fret, it’s not all bad.</p>
+
+                  <p>Asbestos is only dangerous to your lungs when it is inhaled i.e. it is only
+                    hazardous when it forms tiny dust-like fibres that escape into the air. This
+                    means that if your asbestos containing product is not old, friable and damaged,
+                    you are fine.</p>
+                    <br>
+                    <h4 class="ion-text-center">
+                      Just to be sure though, remember to:
+                    </h4>
+                    <br>
+                    <ul>
+                      <li>Have your ceiling tiles and lay-in panels repaired if they are old, cracked or water damaged.</li>
+                      <li>Dispose of asbestos containing construction waste properly</li>
+                      <li>Replace decorative plaster if it is old and peeling</li>
+                      <li>Have heating systems and electric ducts fixed as soon as necessary</li>
+                    </ul>
+                </ion-text>
+              </ion-card-content>
+            </ion-card>
+          </ion-item>
+          <!-- Item 2 -->
+          <ion-item-divider class="ion-padding">
+            <ion-label>Question 2</ion-label>
+          </ion-item-divider>
+          <ion-item>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title class="ion-text-center">Are Bricks Expensive?</ion-card-title>
+              </ion-card-header>
+
+              <ion-card-content>
+                <ion-text>
+                  <p>It’s a very understandable question, for both construction man and home owner.
+                    No matter how big the project, it is important to calculate exactly where you are
+                    spending your money, from every inch to every corner. You must weigh your material
+                    options against the design and environment of your new project, and be sure you are
+                    not wasting revenue on overpriced/poor quality materials.</p>
+
+                  <p>Don’t use the wrong materials for your new space; it will only lead to early signs
+                    of damage and construction failure, which means higher cost and more time spent on
+                    maintenance.  Contact us, we can provide you with all the information regarding construction
+                    material price, quality and availability.</p>
+                </ion-text>
+              </ion-card-content>
+            </ion-card>
+          </ion-item>
+        </ion-item-group>
+
+    </div>
+
+    <!-- Developer -->
+    <div *ngSwitchCase="'Developer'">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Aspiring full stack developer</ion-card-subtitle>
+          <ion-thumbnail class="ion-padding-top">
+            <ion-img src="../../../assets/developer/daniel.jpeg"></ion-img>
+          </ion-thumbnail>
+          <ion-card-title class="ion-text-center">Khumalo Andile</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-text class="ion-text-center">
+            <h6>Member of the MUT Enactus team. Enjoy meeting new
+              people and expanding my circle of friends, passionate
+              about computer programming always looking for growth
+              opportunities and to expand my knowledge. Enjoy writing,
+              testing and debugging computer programs and creating websites.</h6>
+          </ion-text>
+
+          <ion-grid>
+            <ion-row>
+              <!-- <ion-col size="3"></ion-col> -->
+              <ion-col size="3">
+                <ion-button fill="outline" (click)="presonalAlert()">
+                  <ion-icon slot="icon-only" name="logo-whatsapp"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="3">
+                <ion-button color="secondary" fill="outline" (click)="presonalAlert()">
+                  <ion-icon slot="icon-only" name="logo-instagram"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="3">
+                <ion-button color="warning" fill="outline" (click)="presonalAlert()">
+                  <ion-icon slot="icon-only" name="logo-slack"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="3">
+                <ion-button color="tertiary" fill="outline" href="http://linkedin.com/in/andile-khumalo-1087441b7">
+                  <ion-icon slot="icon-only" name="logo-linkedin"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <!-- About -->
+    <div *ngSwitchCase="'About'">
+      <ion-text class="ion-text-center" color="secondary">
+        <h5>Store details | Let's Build Together</h5>
+      </ion-text>
+      <ion-img src="../../../assets/dashboard/about.webp"></ion-img>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Hardware Store</ion-card-subtitle>
+          <ion-thumbnail class="ion-padding-top">
+            <ion-img src="../../../assets/icon/appicon.png"></ion-img>
+          </ion-thumbnail>
+          <ion-card-title class="ion-text-center">Siyeshe Holdings</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-text class="ion-text-center">
+            <h6>Our philosophy of ‘Let’s Build Together’ encapsulates the importance and
+              focus we place on building genuine partnerships with our customers – from
+              our day-to-day contractors to our DIY enthusiasts – we have the merchandise
+              and expertise to help you create a masterpiece.</h6>
+          </ion-text>
+
+          <ion-accordion-group>
+            <ion-accordion value="more" toggle-icon="arrow-down-circle">
+              <ion-item slot="header">
+                <ion-label>Read More</ion-label>
+              </ion-item>
+
+              <ion-list slot="content">
+                <ion-item>
+                  <ion-text class="ion-text-center">
+                    <h6>We offer a wide range of products from well-known tool brands, to hardware,
+                      electrical and plumbing products – ready to take on any challenge, whether it’s on-site or at home.
+                      You can also find an amazing range of elegant and innovative décor products for both indoor and outdoor,
+                      to help you transform any house into a home from the inside-out.
+                      We understand that a fresh coat of paint does not only offer protection for your home’s walls,
+                      but it also helps you to express yourself and amplify the look and feel you want to achieve. Our extensive range of paint colours and products won’t put a limit on your creativity</h6>
+                  </ion-text>
+                </ion-item>
+              </ion-list>
+            </ion-accordion>
+          </ion-accordion-group>
+
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3">
+                <ion-button fill="outline" (click)="presentAlert()">
+                  <ion-icon slot="icon-only" name="logo-whatsapp"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="3">
+                <ion-button color="secondary" fill="outline"  (click)="presentAlert()">
+                  <ion-icon slot="icon-only" name="logo-instagram"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="3">
+                <ion-button color="warning" fill="outline"  (click)="presentAlert()">
+                  <ion-icon slot="icon-only" name="logo-slack"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="3">
+                <ion-button color="tertiary" fill="outline"  (click)="presentAlert()">
+                  <ion-icon slot="icon-only" name="logo-linkedin"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+</ion-content>

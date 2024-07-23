@@ -1,0 +1,7 @@
+{
+  "name": "siyeshe-holdings",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

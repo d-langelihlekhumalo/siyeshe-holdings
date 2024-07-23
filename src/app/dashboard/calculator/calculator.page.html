@@ -1,0 +1,210 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Calculator</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-text class="ion-text-center">
+      <ion-list-header>
+        <ion-label>Choose Preferred Calculator:</ion-label>
+      </ion-list-header>
+    </ion-text>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="2"></ion-col>
+        <ion-col size="8">
+          <ion-button expand="block" color="secondary">
+            <ion-icon slot="start" name="Calculator"></ion-icon>
+            <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" [(ngModel)]="status">
+              <ion-select-option value="Basic Calculator">Basic Calculator</ion-select-option>
+              <ion-select-option value="Brick Calculator">Brick Calculator</ion-select-option>
+              <ion-select-option value="Cement Calculator">Concrete Mix-on-Site Calculator</ion-select-option>
+            </ion-select>
+          </ion-button>
+        </ion-col>
+        <ion-col size="2"></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+  <div [ngSwitch]="status">
+    <!-- Basic Calculator -->
+    <div *ngSwitchCase="'Basic Calculator'">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Basic Calculator</ion-card-subtitle>
+          <form #f="ngForm">
+            <ion-list>
+              <ion-item lines="none">
+                <ion-label position="floating"></ion-label>
+                <ion-input
+                type="text"
+                readonly="true"
+                ngModel name="inputField"
+                #inputFieldCtrl="ngModel"
+                id="basicCalculatorInput"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-text class="ion-text-center">
+                  <h6 class="ion-text-center">{{basicCalculatorExpression}}</h6>
+                </ion-text>
+              </ion-item>
+            </ion-list>
+          </form>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6"><ion-button expand="block" [color]="basicCalculator === 'ON' ? 'success' : 'danger'" (click)="toggleCalculator()">{{basicCalculator}}</ion-button></ion-col>
+              <ion-col size="3"><ion-button expand="block" color="warning" (click)="presentToast('Feature Currently Unavailable')">CE</ion-button></ion-col>
+              <ion-col size="3"><ion-button expand="block" color="secondary" (click)="clearInput()">C</ion-button></ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('7')">7</ion-button> </ion-col>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('8')">8</ion-button> </ion-col>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('9')">9</ion-button></ion-col>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('/')">/</ion-button></ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('4')">4</ion-button></ion-col>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('5')">5</ion-button></ion-col>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('6')">6</ion-button></ion-col>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('x')">x</ion-button></ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('1')">1</ion-button></ion-col>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('2')">2</ion-button></ion-col>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('3')">3</ion-button></ion-col>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('-')">-</ion-button></ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('0')">0</ion-button> </ion-col>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('.')">.</ion-button></ion-col>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('=')">=</ion-button></ion-col>
+              <ion-col size="3"><ion-button expand="block" (click)="appendText('+')">+</ion-button></ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Brick Calculator -->
+    <div *ngSwitchCase="'Brick Calculator'">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Brick Mortar Calculator</ion-card-subtitle>
+          <form [formGroup]="brickCalculator">
+            <ion-item>
+              <ion-text class="ion-text-center" color="danger">
+                <h6>This calculator will estimate quantities of brick and mortar required for a given area for single and double walls.</h6>
+              </ion-text>
+            </ion-item>
+            <ion-item fill="solid" class="ion-margin-bottom">
+              <ion-icon slot="start" name="cube-outline"></ion-icon>
+              <ion-input type="number" placeholder="Wall Length (m)" formControlName="wallWidth"></ion-input>
+              <ion-note slot="error" *ngIf="(wallWidth.dirty|| wallWidth.touched) && wallWidth.errors">Please enter the width of the wall in meters</ion-note>
+            </ion-item>
+            <ion-item fill="solid" class="ion-margin-bottom">
+              <ion-icon slot="start" name="cube-outline"></ion-icon>
+              <ion-input type="number" placeholder="Wall Height (m)" formControlName="wallHeight"></ion-input>
+              <ion-note slot="error" *ngIf="(wallHeight.dirty || wallHeight.touched) && wallHeight.errors">Please enter the height of the wall in meters</ion-note>
+            </ion-item>
+
+          </form>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col *ngIf="brickCalculatorBricksNeeded > 0">
+                <ion-text class="ion-text-center" color="secondary">
+                  <h3>Total m<sup>2</sup>: {{brickCalculatorBricksNeeded}}</h3>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <ion-button expand="block" [disabled]="!brickCalculator.valid" (click)="brickCalculateBricksNeeded()">
+                  <ion-icon name="cube-outline" slot="start"></ion-icon>
+                  Calculate</ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button expand="block" color="danger" (click)="brickCalculatorReset()">
+                  <ion-icon name="refresh-outline" slot="start"></ion-icon>
+                  Reset</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <!-- Cement Calculator -->
+    <div *ngSwitchCase="'Cement Calculator'">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Concrete Mix-on-Site Calculator</ion-card-subtitle>
+          <form [formGroup]="concreteMixSiteCalculator">
+            <ion-item>
+              <ion-text class="ion-text-center" color="danger">
+                <h6>This calculator estimates the required amount of cement, sand and aggregate (stone) for mixing on site for a given area of concrete.</h6>
+              </ion-text>
+            </ion-item>
+            <ion-item fill="solid" class="ion-margin-bottom">
+              <ion-icon slot="start" name="cube-outline"></ion-icon>
+              <ion-input type="number" placeholder="Width (m)" formControlName="mixOnSiteWidth"></ion-input>
+              <ion-note slot="error" *ngIf="(mixOnSiteWidth.dirty|| mixOnSiteWidth.touched) && mixOnSiteWidth.errors">Please enter the width of the wall in meters</ion-note>
+            </ion-item>
+            <ion-item fill="solid" class="ion-margin-bottom">
+              <ion-icon slot="start" name="cube-outline"></ion-icon>
+              <ion-input type="number" placeholder="Length (m)" formControlName="mixOnSiteLength"></ion-input>
+              <ion-note slot="error" *ngIf="(mixOnSiteLength.dirty || mixOnSiteLength.touched) && mixOnSiteLength.errors">Please enter the height of the wall in meters</ion-note>
+            </ion-item>
+            <ion-item fill="solid" class="ion-margin-bottom">
+              <ion-icon slot="start" name="cube-outline"></ion-icon>
+              <ion-input type="number" placeholder="Depth (m)" formControlName="mixOnSiteDepth"></ion-input>
+              <ion-note slot="error" *ngIf="(mixOnSiteDepth.dirty || mixOnSiteDepth.touched) && mixOnSiteDepth.errors">Please enter the height of the wall in meters</ion-note>
+            </ion-item>
+
+          </form>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col *ngIf="concreteMixOnSiteTotal > 0">
+                <ion-text class="ion-text-center" color="secondary">
+                  <h3>Total m<sup>3</sup>: {{concreteMixOnSiteTotal}}</h3>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <ion-button expand="block" [disabled]="!concreteMixSiteCalculator.valid" (click)="concreteMixSiteCalculate()">
+                  <ion-icon name="cube-outline" slot="start"></ion-icon>
+                  Calculate</ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button expand="block" color="danger" (click)="concreteMixSiteCalculatorReset()">
+                  <ion-icon name="refresh-outline" slot="start"></ion-icon>
+                  Reset</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+  </div>
+</ion-content>

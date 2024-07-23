@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Your Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>User Profile</ion-card-subtitle>
+      <ion-card-title class="ion-text-center ">{{currentUser?.username}}</ion-card-title>
+      <ion-thumbnail class="ion-margin-top ion-margin-bottom">
+        <ion-img class="ion-padding-top" src="../../../assets/user/profile.png"></ion-img>
+      </ion-thumbnail>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3"></ion-col>
+          <ion-col size="6">
+            <ion-button expand="block" (click)="togglePassword()">
+              <ion-icon slot="icon-only" [name]="!isShowPassword ? 'eye' : 'eye-off'"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="3"></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div style="overflow-x:auto;">
+        <table>
+          <tr>
+            <th>Name</th>
+            <td>{{currentUser?.name}}</td>
+          </tr>
+          <tr>
+            <th>Surname</th>
+            <td>{{currentUser?.surname}}</td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td>{{currentUser?.email.substring(0, currentUser?.email.indexOf('@'))}}</td>
+          </tr>
+          <tr>
+            <th>Password</th>
+            <td>{{isShowPassword ? currentUser?.password : '*'.repeat(currentUser?.password.length)}}</td>
+          </tr>
+        </table>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

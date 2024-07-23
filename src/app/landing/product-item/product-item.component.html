@@ -1,0 +1,12 @@
+<ion-item
+  [routerLink]="['/', 'landing', product?.id]"
+  detail="">
+  <ion-thumbnail slot="start">
+    <ion-img [src]="product?.imageUrl"></ion-img>
+  </ion-thumbnail>
+  <ion-label>
+    <h2>{{ product?.title }}</h2>
+    <p>{{ product?.summary }}</p>
+  </ion-label>
+</ion-item>
+

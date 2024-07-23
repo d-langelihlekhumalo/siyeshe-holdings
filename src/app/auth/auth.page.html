@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="landing"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <ion-thumbnail class="ion-margin-top ion-margin-bottom">
+    <ion-img class="ion-padding-top" src="../../assets/user/avatar.png"></ion-img>
+  </ion-thumbnail>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="credentials" class="ion-margin-top">
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-icon slot="start" name="mail"></ion-icon>
+      <ion-input type="email" placeholder="Email Address" formControlName="email"></ion-input>
+      <ion-note slot="error" *ngIf="(email.dirty|| email.touched) && email.errors">Email is invalid</ion-note>
+    </ion-item>
+    <ion-item fill="solid" class="ion-margin-bottom">
+      <ion-icon slot="start" [name]="!isShowPassword ? 'eye' : 'eye-off'" (click)="togglePassword()"></ion-icon>
+      <ion-input [type]="!isShowPassword ? 'password' : 'text'" placeholder="Password" formControlName="password"></ion-input>
+      <ion-note slot="error" *ngIf="(password.dirty || password.touched) && password.errors">Password needs to be 6 characters</ion-note>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-text class="ion-text-end">
+            <h6><span (click)="presentModalForgotPassword()">Forgot password</span></h6>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-button type="submit" expand="block" [disabled]="!credentials.valid">
+            <ion-icon name="log-in-outline" slot="start"></ion-icon>
+            Log In</ion-button>
+            <ion-text class="ion-text-center">
+              <h6>Don't have an account? <span (click)="presentModalSignUp()">Sign Up</span></h6>
+            </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

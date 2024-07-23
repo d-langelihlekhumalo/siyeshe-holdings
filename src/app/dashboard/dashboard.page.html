@@ -1,0 +1,31 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="products">
+      <ion-label>Products</ion-label>
+      <ion-icon name="grid-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="cart">
+      <ion-badge>{{cartItemsCount === undefined ? '0' : cartItemsCount}}</ion-badge>
+      <ion-label>Cart</ion-label>
+      <ion-icon name="cart-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="orders">
+      <ion-badge color="secondary">{{orderItemsCount === undefined ? '0' : orderItemsCount}}</ion-badge> <!-- mkae dynamic vlue to represent cart length -->
+      <ion-label>Orders</ion-label>
+      <ion-icon name="bag-handle-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="profile">
+      <ion-label>Profile</ion-label>
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="calculator">
+      <ion-label>Calculator</ion-label>
+      <ion-icon name="calculator-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="faqs">
+      <ion-label>FAQs</ion-label>
+      <ion-icon name="information-circle-outline"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+

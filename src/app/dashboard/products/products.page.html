@@ -1,0 +1,149 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ status }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-toggle color="secondary" checked (click)="toggleView()"></ion-toggle>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="status">
+    <ion-segment-button value="Building Material">
+      <ion-label>Building Material</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Featured Departments">
+      <ion-label>Featured Departments</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Switcher -->
+  <div [ngSwitch]="status">
+    <!-- Display Building Materials -->
+    <ion-grid class="ion-no-padding"  *ngSwitchCase="'Building Material'">
+      <ion-img class="ion-no-padding" src="../../../assets/dashboard/buildingMaterials.jpg"></ion-img>
+      <ion-row>
+        <ion-col>
+          <ion-text class="ion-text-center">
+            <h2>{{status}}</h2>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <!--
+      Display products:
+        - Display spinner then products if found
+     -->
+     <ion-row *ngIf="isBuildingMaterialLoading">
+      <ion-col size="4"></ion-col>
+      <ion-col size="4" class="ion-text-center">
+        <ion-spinner color="primary" name="circles"></ion-spinner>
+      </ion-col>
+      <ion-col size="4"></ion-col>
+    </ion-row>
+      <ion-row class="ion-padding" *ngIf="!isBuildingMaterialLoading && isDisplayList">
+        <ion-col>
+          <ion-list>
+            <ion-item-sliding *ngFor="let product of loadedProducts" #slidingItem>
+              <!-- Add to cart -->
+              <ion-item-options side="start">
+                <ion-item-option color="tertiary"
+                  (click)="displayProductsCart(product?.id, slidingItem)"
+                  [disabled]="product?.productTypes.length === 0">
+                  <ion-icon name="cart-outline" slot="icon-only"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+              <!-- Product -->
+                <ion-item
+                  [routerLink]="['/', 'dashboard', 'tabs', 'products', 'cart', product?.id]"
+                  detail=""
+                  [disabled]="product?.productTypes.length === 0">
+                  <ion-thumbnail slot="start">
+                    <ion-img [src]="product?.image"></ion-img>
+                  </ion-thumbnail>
+                  <ion-label>
+                    <h2>{{ product?.title }}</h2>
+                    <p *ngIf="product?.productTypes.length > 0">{{ product?.productTypes.length }} item(s)</p>
+                    <ion-text *ngIf="product?.productTypes.length === 0" color="danger">
+                      <p>out of stock</p>
+                    </ion-text>
+                  </ion-label>
+                </ion-item>
+              <!-- View more -->
+              <ion-item-options side="end">
+                <ion-item-option color="primary"
+                  (click)="displayDetailedProducts(product?.id, slidingItem)"
+                  [disabled]="product?.productTypes.length === 0">
+                  <ion-icon name="eye-outline" slot="icon-only"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <!-- Toggle display -->
+      <ion-row *ngIf="!isBuildingMaterialLoading && !isDisplayList">
+        <ion-col *ngFor="let product of loadedProducts" size="6">
+            <ion-item [routerLink]="['/', 'dashboard', 'tabs', 'products', 'cart', product?.id]"
+              detail=""
+              [disabled]="product?.productTypes.length === 0">
+              <ion-avatar slot="start">
+                <ion-img [src]="product?.image"></ion-img>
+              </ion-avatar>
+              <ion-label>
+                <h2>{{product?.title}}</h2>
+                <p>{{ product?.productTypes.length }} item(s)</p>
+              </ion-label>
+            </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- Display Featured Departments -->
+    <ion-grid class="ion-no-padding" *ngSwitchCase="'Featured Departments'">
+      <!-- Featured Products -->
+      <div *ngIf="isLoading">
+        <ion-row>
+        <ion-col sizeSm="4"></ion-col>
+        <ion-col sizeSm="4">
+          <ion-spinner color="primary" name="bubbles"></ion-spinner>
+        </ion-col>
+        <ion-col sizeSm="4"></ion-col>
+      </ion-row>
+      </div>
+      <!--  Display products -->
+      <ion-img class="ion-no-padding" src="../../../assets/dashboard/featuredDepartments.jpg"></ion-img>
+      <div *ngIf="!isLoading">
+        <ion-row class="ion-padding">
+          <ion-col size="12" class="ion-text-center">
+            <h1>Featured Departments</h1>
+            <!-- Add product to database
+                <ion-button color="primary" expand="block" (click)="addProduct()">
+                  Add Featured Product
+                </ion-button> -->
+          </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col id="featured-products">
+          <!-- Display products -->
+          <ion-list>
+            <ion-item-sliding *ngFor="let product of loadedFeaturedProducts" #slidingItem>
+              <app-featured-product-item [product]="product"></app-featured-product-item>
+
+              <ion-item-options side="end">
+                <ion-item-option color="tertiary" (click)="displayProductDetails(product.id, slidingItem)">
+                  <ion-icon name="eye-outline" slot="icon-only"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+      </ion-col>
+    </ion-row>
+      </div>
+
+  </ion-grid>
+
+</div>
+
+</ion-content>
